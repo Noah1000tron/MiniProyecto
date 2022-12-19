@@ -1,0 +1,106 @@
+<div class="container mt-5">
+  <div *ngIf="rol=='A'">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre de archivo</th>
+            <th>Fecha</th>
+            <th>Numero Vacante</th>
+            <th>Compañia</th>
+            <th>Usuario</th>
+            <th>Obtener</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of curriculum" >
+            <td>{{i.nombreArchivo}}</td>
+            <td>{{i.fecha}}</td>
+            <td>{{i.id_vacante}}</td>
+            <td>{{i.nombrecomp}}</td>
+            <td>
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#InfoUserModal" (click)="cargarusuario(i)">
+                    {{i.contact}}
+                  </button>
+            </td>
+            <td><button type="button" class="btn " (click)="descargarArchivo(i.nombreArchivo)">Descargar</button></td>
+
+        </tr>
+    </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="rol=='U'">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre de archivo</th>
+            <th>Fecha</th>
+            <th>Numero Vacante</th>
+            <th>Compañia</th>
+            <th>Puesto</th>
+            <th>Sueldo</th>
+            <th>Cancelar</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of curriculum" >
+            <td>{{i.nombreArchivo}}</td>
+            <td>{{i.fecha}}</td>
+            <td>{{i.id_vacante}}</td>
+            <td>{{i.nombrecomp}}</td>
+            <td>{{i.puesto}}</td>
+            <td>{{i.sueldo}}</td>
+            <td><button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalDelete"  (click)="seleccionarCurriculum(i)">Cancelar</button></td>
+
+        </tr>
+    </tbody>
+    </table>
+  </div>
+  <div *ngIf="curriculum.length==0" style="text-align: center;"><br><br><h1>No hay ningun curriculum enviado</h1>
+    <br><br>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="InfoUserModal" tabindex="-1" aria-labelledby="InfoUserModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="InfoUserModal">Informacion de Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Nombre: {{usuario.name}}</p>
+          <p>Apellido: {{usuario.lastname}}</p>
+          <p>Correo: {{usuario.contact}}</p>
+          <p>Telefono: {{usuario.cellphone}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="curriculum1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Se eliminara el siguiente elemento, desea continuar?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p class="">Compañia: {{curriculum1.nombreArchivo}}</p>
+            <p class="">Giro: {{curriculum1.fecha}}</p>
+            <p class="">Puesto: {{curriculum1.id_vacante}}</p>
+            <p class="">Modalidad: {{curriculum1.nombrecomp}}</p>
+            <p class="">Experiencia: {{curriculum1.puesto}}</p>
+            <p class="">Sueldo: {{curriculum1.sueldo}}</p>
+            <small>{{curriculum1.id}}</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" (click)="eliminarRelacionCurriculumByUser(curriculum1.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>

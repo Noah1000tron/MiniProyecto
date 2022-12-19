@@ -1,0 +1,89 @@
+<br>
+<div class="cabeza">
+  <h1>Preguntas frecuentes</h1><br>
+</div>
+<div class="acordeon">
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          ¿Cómo funciona?
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" >
+        <div class="accordion-body">
+          <strong>En nuetra pagina de inicio.</strong> Tan simple como crear una cuenta, siguiendo nuestos pasos, para disfrutar los veneficios que puede ofrecer Empresa chida™.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          ¿Cuánto dinero cuesta la adquisición de este producto? 
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" >
+        <div class="accordion-body">
+          <strong>Es gratis*.</strong> En Empresa chida™ nos aseguramos de que sea de libre ecceso a todo el campo laboral, para emezar a trabajar. *acceso a campos mas altos pueden tener un costo adicional.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          ¿Tiene garantía?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>Garantizado por nuestros clientes.</strong> todos, si no es que la gran mayoria de los usuarios han estado satisfecos a haber acercado a Empresa chida™.
+        </div>
+      </div>
+    </div>
+  </div>  
+</div><br>
+
+<div class="margen">
+  <div class="container">
+    <h1>¿Aun tienes dudas? Habla con nosotros</h1>
+    <h3>Chat sobre dudas</h3>
+    <app-username (userNameEvent)="userNameUpdate($event)" *ngIf="!userName"></app-username><br>
+
+    <div class="chatbox">
+      <div class="chatbox__user-list" class="form-label mt-4">
+        <h2>lista de usuarios</h2>
+        <div class="chatbox__user--active" *ngFor="let user of userList" >
+          <p>{{user}}</p>
+        </div>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <button type="button" class="btn btn-outline-secondary">agregar usuario</button>
+        <button type="button" class="btn btn-outline-secondary">agregar a grupo</button>
+        <button type="button" class="btn btn-outline-secondary">reportar</button>
+        <button type="button" class="btn btn-outline-secondary">Bloquear del chat</button>
+        <button type="button" class="btn btn-outline-secondary">silenciar usuario</button>
+        <button type="button" class="btn btn-outline-secondary">infromación de partisipantes</button>
+        <button type="button" class="btn btn-outline-light">mas</button>
+        <button type="button" class="btn btn-outline-dark">regresar</button>
+      </div>
+      
+      <div class="messages_list" class="list-group">
+        <div class="chatbox__messages" *ngFor="let msg of messageList" [ngClass]="{mine: msg.mine}">
+          <div class="user-message card" >
+            <div class="message-box card-body" >
+              <p class="name text-center lead col-sm-2 col-form-label" for="staticEmail"> Mensaje de {{ msg.userName }}:</p>
+              <br/>
+              <p class="message lead text-center col-sm-2 col-form-label" for="staticEmail" >{{ msg.message }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="send-message">
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="message"><br>
+      <button type="button" class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+    </div>
+  </div><br>
+
+</div>
+

@@ -1,0 +1,62 @@
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <img src="./assets/logo.jpg" width="50" height="50">
+      <button class="btn btn-secondary my-2 my-sm-0" href="#" type="submit">Empresa chida™</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a routerLink="/inicio" class="nav-link active" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" routerLink="/pregunta">Preguntas frecuentes</a>
+          </li>
+
+          <li class="nav-item" *ngIf="login!=null">
+            <a class="nav-link" href="#" routerLink="/vacantes">Cosillas</a>
+          </li>
+          <li class="nav-item" *ngIf="login==null">
+            <a class="nav-link" href="#" routerLink="/login">Cosillas</a>
+          </li>
+          <li class="nav-item" *ngIf="rol!=null">
+            <a class="nav-link" href="#" routerLink="/curriculum">Curriculums</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" routerLink="/somos">Sobre nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" routerLink="/contacto">¿Tienes dudas? contactanos!</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Buscar">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+        <ng-container *ngIf="login==null">
+
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/registro">Registrate</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="login!=null">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+          </button>
+          <ul class="dropdown-menu dropdown-menu-lg-end">
+            <li class="text-center">{{name}} {{lastname}}</li>
+            <li class="text-center">{{login}}</li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="cerrarSesion()"  routerLink="/inicio">Cerrar sesion</a></li>
+          </ul>
+        </div>
+      </ng-container>
+
+      </div>
+    </div>
+  </nav>

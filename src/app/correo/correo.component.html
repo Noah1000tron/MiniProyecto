@@ -1,0 +1,45 @@
+
+<div class="container">
+    <h1>Contacta con nosotros si tienes cualquier tipo de duda</h1>
+  </div><br>
+  <br>
+  
+  <div class="container">
+    <form [formGroup]="datos">
+      <div>
+        <div>
+          <h3>Contactanos por si tienes alguna duda </h3>
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Correo ejemplo:</label>
+            <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="correo@correo.com">
+            <br>
+          </div>
+          <div>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="nombre" formControlName="nombre"><br>
+            <label for="exampleInputEmail1" class="form-label mt-4">Correo:</label>
+            <input type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="correo@correo.com" formControlName="correo"><br>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="asunto" formControlName="asunto"><br>
+            <label for="exampleTextarea" class="form-label mt-4">Escribe el mensaje</label>
+            <textarea class="form-control"  id="exampleTextarea" placeholder="mensaje" cols="40" rows="4" formControlName="mensaje"></textarea><br>
+            <div>
+              <button class="btn btn-outlet-danger" (click)="enviocorreo()">Enviar correo</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </form><br>
+    <br>
+    <h2>contactanos</h2>
+    <div>
+      <p>xxx-xxx-xx-xx</p>
+      <p>xxx-xxx-xx-xx</p>
+      <p>Av. AlgunLugar #123</p>
+    </div>
+  </div>
+    <h2>Lorem ipsum dolor sit amet.</h2>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic nostrum labore obcaecati. Nesciunt fugit veritatis libero assumenda a voluptatem ullam quod, molestiae ad laudantium. Accusantium accusamus architecto similique praesentium voluptatibus incidunt ipsam ex, molestias harum inventore voluptatum hic minima illum! A nostrum ipsa tempora blanditiis quasi illum fugit minus sequi.</p><br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam accusamus quod sunt iste.</p>
+    </div>
+  

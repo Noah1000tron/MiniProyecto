@@ -1,0 +1,319 @@
+<div class="row" *ngIf="rol=='A'">
+<button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalCreate">
+    Crear nueva vacante
+  </button>
+</div>
+  
+  
+
+<div class="container-fluid">
+    <br>
+    <div class="row">
+      
+      <div class="col-6">
+        <form [formGroup]="filterForm">
+          <table>
+            <td><select class="form-select-sm" aria-label="Default select example" formControlName="filtrar" (click)="verificar()">
+              <option value="" selected>No filtrar</option>
+              <option value="puesto">filtar por Puesto</option>
+              <option value="compania">filtrar por compañia</option>
+            </select></td>
+            <td *ngIf="filtrar?.value=='puesto'" class="ms-5">
+              <select  class="form-select-sm ms-3" aria-label="Default select example" formControlName="puesto" >
+                <option selected value="" disabled>Puesto</option>
+                <option value="Ayudante general" selected>Ayudante general</option>
+                <option value="Gerente" >Gerente</option>
+                <option value="SubGerente">SubGerente</option>
+                <option value="Operador">Operador</option>
+              </select>
+            </td>
+            <td *ngIf="filtrar?.value=='compania'" class="ms-5">
+              <input  style="width: 100%;" type="text" class="form-control ms-3" formControlName="companiaBusqueda" placeholder="Compañia">
+            </td>
+            <td *ngIf="filtrar?.value=='puesto'" class="ms-5">
+              <button  class="btn ms-3" (click)="obtenerVacantesPuesto()">filtrar</button>
+            </td>
+            <td *ngIf="filtrar?.value=='compania'" class="ms-5">
+              <button  class="btn ms-3" (click)="obtenerVacantesCompania()">filtrar</button>
+            </td>
+          </table>
+      </form>
+      </div>
+      <div class="col-6">
+    <select [(ngModel)]="opcion" class="form-select-sm" id="DropdownOptions" style="width: 100px;float: right;">
+        <option
+          *ngFor="let opt of ngOptions"
+          [selected]="opt === ngDropdown"
+          [value]="opt">
+          {{ opt }}
+        </option>
+      </select>
+    </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- Modal creae -->
+  <div  class="modal fade" id="ModalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear nueva vacante</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+                <div class="container ">
+                    <form [formGroup]="createForm">
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Nombre de compania</label>
+                          <input type="text" class="form-control" formControlName="nombrecomp">
+                          <small *ngIf="nombrecomp?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Fecha de registro</label>
+                            <input type="date" class="form-control" formControlName="fecha">
+                            <small *ngIf="fecha?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                          </div>
+            
+                        <div class="mb-3">
+                           <label for="exampleInputPassword1" class="form-label">Giro de la empresa</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="giro">
+                                <option selected value="automotriz">automotriz</option>
+                                <option value="textil">textil</option>
+                                <option value="agricultura">agricultura</option>
+                                <option value="alimentos y bebidas">alimentos y bebidas</option>
+                                <option value="industria quimica">industria quimica</option>
+                                <option value="industria mecanica">industria mecanica</option>
+                                <option value="Comunicacion">Comunicacion</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                              <small *ngIf="giro?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Puesto</label>
+                             <select class="form-select" aria-label="Default select example" formControlName="puesto">
+                                 <option selected value="Ayudante general">Ayudante general</option>
+                                 <option value="Gerente">Gerente</option>
+                                 <option value="SubGerente">SubGerente</option>
+                                 <option value="Operador">Operador</option>
+                               </select>
+                               <small *ngIf="puesto?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                           </div>
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Experiencia</label>
+                            <input type="text" class="form-control" formControlName="experiencia" >
+                            <small *ngIf="experiencia?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Modalidad</label>
+                             <select class="form-select" aria-label="Default select example" formControlName="modalidad">
+                                 <option selected value="Hibrido">Hibrido</option>
+                                 <option value="Presencial">Presencial</option>
+                                 <option value="A distancia">A distancia</option>
+                               </select>
+                               <small *ngIf="modalidad?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                           </div>
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Sueldo</label>
+                                <input type="number" class="form-control" formControlName="sueldo">
+                                <small *ngIf="sueldo?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                              </div>
+                        </form>
+                </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" (click)="crearVacante()" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="vacante">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Se eliminara el siguiente elemento, desea continuar?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p class="">Compañia: {{vacante.nombrecomp}}</p>
+            <p class="">Giro: {{vacante.giro}}</p>
+            <p class="">Puesto: {{vacante.puesto}}</p>
+            <p class="">Modalidad: {{vacante.modalidad}}</p>
+            <p class="">Experiencia: {{vacante.experiencia}}</p>
+            <p class="">Sueldo: {{vacante.sueldo}}</p>
+            <p class="">Fecha: {{vacante.fecha}}</p>
+            <small>{{vacante.id}}</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" (click)="eliminarVacanteById(vacante.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal update -->
+  <div class="modal fade" id="ModalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="vacante">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar elemento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container ">
+                <form [formGroup]="updateForm">
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Nombre de compania</label>
+                      <input type="text" class="form-control" formControlName="nombrecomp">
+                      <small *ngIf="nombrecomp2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Fecha de registro</label>
+                        <input type="date" class="form-control" formControlName="fecha">
+                        <small *ngIf="fecha2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                      </div>
+        
+                    <div class="mb-3">
+                       <label for="exampleInputPassword1" class="form-label">Giro de la empresa</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="giro">
+                            <option selected value="automotriz">automotriz</option>
+                            <option value="textil">textil</option>
+                            <option value="agricultura">agricultura</option>
+                            <option value="alimentos y bebidas">alimentos y bebidas</option>
+                            <option value="industria quimica">industria quimica</option>
+                            <option value="industria mecanica">industria mecanica</option>
+                            <option value="Comunicacion">Comunicacion</option>
+                            <option value="Otros">Otros</option>
+                          </select>
+                          <small *ngIf="giro2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Puesto</label>
+                         <select class="form-select" aria-label="Default select example" formControlName="puesto">
+                             <option selected value="Ayudante general">Ayudante general</option>
+                             <option value="Gerente">Gerente</option>
+                             <option value="SubGerente">SubGerente</option>
+                             <option value="Operador">Operador</option>
+                           </select>
+                           <small *ngIf="puesto2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                       </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Experiencia</label>
+                        <input type="text" class="form-control" formControlName="experiencia" >
+                        <small *ngIf="experiencia2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Modalidad</label>
+                         <select class="form-select" aria-label="Default select example" formControlName="modalidad">
+                             <option selected value="Hibrido">Hibrido</option>
+                             <option value="Presencial">Presencial</option>
+                             <option value="A distancia">A distancia</option>
+                           </select>
+                           <small *ngIf="modalidad2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                       </div>
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Sueldo</label>
+                            <input type="number" class="form-control" formControlName="sueldo">
+                            <small *ngIf="sueldo2?.errors?.['required']" style="color: rgb(116, 36, 36);">requerido.</small>
+                          </div>
+                    </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" (click)="actualizaVacante()" data-bs-dismiss="modal">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="vacantes.length==0" style="text-align: center;"><br><br><h1>No hay vacantes disponibles</h1>
+<br><br></div>   
+
+<div class="lightbox" *ngIf="opcion==ngOptions[1]">
+<div class="row">
+    <div *ngFor="let i of vacantes" class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <h5 class="card-header">{{i.puesto}}</h5>
+                <div class="card-body">
+                <h5 class="card-title">Compañia: {{i.nombrecomp}}</h5>
+                <p class="card-text">Giro: {{i.giro}}</p>
+                <p class="card-text">Modalidad: {{i.modalidad}}</p>
+                <p class="card-text">Experiencia: {{i.experiencia}}</p>
+                <p class="card-text">Sueldo: {{i.sueldo}}</p>
+                
+                <div  *ngIf="rol=='U'">
+
+                      <label for="formFile" class="form-label ">Adjuntar curriculum</label>
+                      <input class="form-control" type="file" id="formFile" accept="application/pdf" (change)="getFile($event)">
+                      <button type="button" class="btn" (click)="sendFile(i.id)">Enviar</button>
+
+                </div>
+
+                <div *ngIf="rol=='A'">
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalUpdate" (click)="seleccionarVacante(i)">Modificar</button>
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalDelete" (click)="seleccionarVacante(i)">Eliminar</button>
+                </div>
+                <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+                <div class="card-footer text-muted">
+                    <p class="card-text">Fecha: {{i.fecha}}</p>
+                </div>
+            </div>
+
+
+
+    <br>
+    </div>
+</div>
+</div>
+
+
+<div *ngIf="opcion==ngOptions[0]" >
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Compañia</th>
+            <th>Giro</th>
+            <th>Puesto</th>
+            <th>Modalidad</th>
+            <th>Experiencia</th>
+            <th>Sueldo</th>
+            <th>Fecha</th>
+            <th *ngIf="rol=='A'">Acciones</th>
+            <th *ngIf="rol=='U'">Cargar Curriculum</th>
+            <th *ngIf="rol=='U'">Enviar</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of vacantes" >
+            <td>{{i.nombrecomp}}</td>
+            <td>{{i.giro}}</td>
+            <td>{{i.puesto}}</td>
+            <td>{{i.modalidad}}</td>
+            <td>{{i.experiencia}}</td>
+            <td>{{i.sueldo}}</td>
+            <td>{{i.fecha}}</td>
+            <td *ngIf="rol=='A'"><button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalUpdate" (click)="seleccionarVacante(i)">Modificar</button>
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ModalDelete" (click)="seleccionarVacante(i)">Eliminar</button></td>
+            <td *ngIf="rol=='U'">
+                <input class="form-control" type="file" id="formFile" accept="application/pdf"  (change)="getFile($event)">
+            </td>
+            <td *ngIf="rol=='U'">
+            <button type="button" class="btn" (click)="sendFile(i.id)">Enviar</button>
+          </td>
+                
+        </tr>
+    </tbody>
+    </table>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div id="principal">
+ 
+    <div class="mb-3">
+      <label for="id" class="form-label">id</label>
+      <input type="text"[(ngModel)]="id" class="form-control" id="id"  >
+       
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" [(ngModel)]="name" class="form-control" id="name">
+    </div>
+    <div class="mb-3">
+        <label for="lastname" class="form-label">apellido</label>
+        <input type="text" [(ngModel)]="lastname"class="form-control" id="lastname"  >
+         
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo</label>
+        <input type="text" [(ngModel)]="email" class="form-control" id="email">
+      </div>
+      <div class="mb-3">
+        <label for="tel" class="form-label">Telefono</label>
+        <input type="text" [(ngModel)]="tel" class="form-control" id="tel">
+      </div>
+     
+      <td><button type="button" class="btn btn-primary" (click)="insertar()" >insertar</button></td>
+      <td><button type="button" class="btn btn-secondary" (click)="limpiar()" >limpiar</button></td>
+
+ 
+</div>

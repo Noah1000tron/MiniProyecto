@@ -1,0 +1,42 @@
+<br>
+<div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="formularioEnviado()">
+        <fieldset>
+          <h2>Registro de usuario nuevo</h2>
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Correo ejemplo:</label><br>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="correo@correo.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputuser1" class="form-label mt-4">Nombre:</label>
+            <input type="user" class="form-control" id="exampleInputuser1" aria-describedby="emailHelp" placeholder="nombre del usuario" formControlName="name">
+            <small *ngIf="name?.errors?.['required']" style="color: rgb(116, 36, 36);">nombre es requerido.</small>
+            <br>
+            <label for="exampleInputuser2" class="form-label mt-4">Apellido:</label>
+            <input type="user" class="form-control" id="exampleInputuser2" aria-describedby="emailHelp" placeholder="apellido del usuario" formControlName="lastname">
+            <small *ngIf="lastname?.errors?.['required']" style="color: rgb(116, 36, 36);">apellido es requerido.</small>
+            <br>
+            <label for="exampleInputEmail1" class="form-label mt-4">Correo:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="correo@correo.com" formControlName="contact">
+            <small id="emailHelp" class="form-text text-muted">tus datos son privados, no se compartirán con nadie</small>
+            <small *ngIf="contact?.errors?.['required']" style="color: rgb(116, 36, 36);">Correo es requerido.</small>
+            <small *ngIf="contact?.errors?.['pattern']" style="color: rgb(116, 36, 36);">Debe ingresar un correo.</small>
+            <br>
+            <label for="exampleInputuser3" class="form-label mt-4">Telefono:</label>
+            <input type="tel" class="form-control" id="exampleInputuser3" aria-describedby="emailHelp" placeholder="123-45-678" formControlName="cellphone">
+            <small *ngIf="cellphone?.errors?.['required']" style="color: rgb(116, 36, 36);">telefono es requerido.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="form-label mt-4">Contraseña:</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="clave" formControlName="palabra">
+            <small *ngIf="palabra?.errors?.['required']" style="color: rgb(116, 36, 36);">Contraseña es requerido.</small>
+          </div>
+          <div>
+            <button class="btn btn-outlet-danger"  >Registrar</button>
+          </div>
+        </fieldset>
+    </form><br>
+    <br>
+</div>

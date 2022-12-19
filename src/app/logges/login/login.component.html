@@ -1,0 +1,29 @@
+<br>
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="formularioEnviado()">
+        <fieldset>
+          <h2>Bienvenido de nuevo </h2>
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-4">Correo:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="correo@correo.com" formControlName="contact" >
+            <small id="emailHelp" class="form-text text-muted">tus datos son privados, no se compartirán con nadie</small>
+            <small *ngIf="contact?.errors?.['required']" style="color: rgb(116, 36, 36);">Correo es requerido.</small>
+            <small *ngIf="contact?.errors?.['pattern']" style="color: rgb(116, 36, 36);">Debe ingresar un correo.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="form-label mt-4">Contraseña:</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="clave" formControlName="palabra" >
+          </div>
+          <small *ngIf="palabra?.errors?.['required']" style="color: rgb(116, 36, 36);">Contraseña es requerido.</small>
+          <br>
+          <br>
+          <div>
+            <button class="btn btn-outlet-danger" type="submit">ingresar</button>
+          </div>
+        </fieldset>
+    </form><br>
+    <div class="alert alert-danger" role="alert" *ngIf="alerta">
+      Datos incorrectos. Intenta de nuevo o si no tienes aun una cuenta <a routerLink="/registro" class="alert-link">registrate</a>
+    </div>
+    <br>
+</div>

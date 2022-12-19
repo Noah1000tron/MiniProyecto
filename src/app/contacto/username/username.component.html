@@ -1,0 +1,12 @@
+<!-- <div>
+    <input type="text" [(ngModel)]="userName">
+    <button (click)="setUserName()" >confirmar nombre</button>
+  </div> -->
+  <div class="form-group">
+    <div class="container">
+      <label for="exampleInputEmail1" class="form-label mt-4">Nombre de usuario</label>
+    </div>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ingresa el nombre" [(ngModel)]="userName"><br>
+    <small id="emailHelp" class="form-text text-muted">esta infromación se mantiene pirvada, no se compartira con nadie.</small>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="setUserName()">confirmar nombre</button><br>
